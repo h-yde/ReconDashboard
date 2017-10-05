@@ -1,0 +1,500 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Priv8 Recon Dashboard</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+  </head>
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <a class="navbar-brand" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> REST API Fuzzer</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+          <li id="nav-item-0" class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="#">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">
+                Dashboard</span>
+            </a>
+          </li>
+          <li id="nav-item-1" class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="#requestedit">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <span class="nav-link-text">
+                Request Editor</span>
+            </a>
+          </li>
+          <li id="nav-item-2" class="nav-item" data-toggle="tooltip" data-placement="right" title="Notes">
+            <a class="nav-link" href="#notes">
+              <i class="fa fa-sticky-note"></i>
+              <span class="nav-link-text">
+                Notes</span>
+            </a>
+          </li>
+          <li id="nav-item-3" class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <a class="nav-link" href="#previous-scans">
+              <i class="fa fa-history"></i>
+              <span class="nav-link-text">
+                My Scans</span>
+            </a>
+          </li>
+
+          <li data-toggle="tooltip" data-placement="right" title="Menu Levels">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+              <i class="fa fa-fw fa-sitemap"></i>
+              <span class="nav-link-text">
+                Tools</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseMulti">
+              <li id="nav-item-4">
+                <a class="nav-link" href="#aquatone"><i class="fa fa-fighter-jet" aria-hidden="true"></i> Aquatone Flyover</a>
+              </li>
+              <li id="nav-item-5">
+                <a class="nav-link" href="#nmap"><i class="fa fa-search"></i> Nmap Scan</a>
+              </li>
+              <li id="nav-item-6">
+                <a class="nav-link" href="#sslscan"><i class="fa fa-heartbeat"></i> SSL Scanner</a>
+              </li>
+              <li>
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2"><i class="fa fa-flag" aria-hidden="true"></i> Reporting</a>
+                <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                  <li id="nav-item-7">
+                    <a class="nav-link" href="#import-report-template"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Import a report Template</a>
+                  </li>
+                  <li id="nav-item-8">
+                    <a class="nav-link" href="#generate-report"><i class="fa fa-money" aria-hidden="true"></i> Generate a report</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active"><span id="breadcrum-name">Dashboard</span></li>
+        </ol>
+        <!-- Icon Cards -->
+        <div class="row">
+        </div>
+        <!-- Example Tables Card -->
+        <div class="card mb-3">
+        </div>
+      </div>
+
+      <!-- Main Dashboard -->
+      <div id="dashboard">
+          <div style="margin: 15px; padding: 15px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+            <h3>Dashboard</h3>
+            <hr>
+              <ul>
+                <li>Updates:</li>
+                <ul>
+                  <li>Notes are viewed in fullscreen now</li>
+                  <li>Note and report editor improved to include markdown preview</li>
+                  <li>Report saving is now functional</li>
+                </ul>
+                <li>To Do:</li>
+                <ul>
+                  <li>Add report template importing</li>
+                  <li>Make HTTP Request Editor functional</li>
+                </ul>
+              </ul>
+          </div>
+      </div>
+
+      <!-- SSL Scanner -->
+      <div id="sslscan" style="display: none;">
+          <div class="dashboard-table" style="margin: 15px; padding: 15px; border-radius: 5px; background-color: #e9ecef; width: 60%;">
+          <h4>SSL Scanner</h4>
+          <div class="row form-group nmap-dashboard" style="margin: 15px;">
+            <input class="form-control" id="ssl_target_name" style="width: 100%; margin-bottom: 5px;" type="text" placeholder="Output File Name" />
+            <textarea class="form-control" rows=8 placeholder="Aquatone Output (JSON)" style="width: 100%; height: 100%;" id="SSL-Aquatone-Hosts-JSON"></textarea>
+            <button type="button" class="btn btn-danger" onclick="javascript:$('#sslProgressModal').modal('show'); sslScan($('#SSL-Aquatone-Hosts-JSON').val()); interval3 = setInterval(sslscanProgressCheck,1000);" style="margin-top: 10px; width: 100%;">SSL Scan <i class="fa fa-heartbeat" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report Template Importer -->
+      <div id="import-report-template" style="display: none; margin: 15px; padding: 10px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+          <div style="margin: 5px; padding: 5px; border-radius: 5px; width: 80%; background-color: #e9ecef;">
+            <h4>Import Report Template</h4>
+            <form method="POST"  action="/upload" enctype=multipart/form-data>
+                <input type="file" name="file">
+                <button type="submit" class="btn btn-primary">Upload <i class="fa fa-upload" aria-hidden="true"></i></button>
+            </form>
+          </div>
+      </div>
+
+      <!-- Report Generator -->
+      <div id="generate-report" style="display: none; margin: 15px; padding: 10px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+          <div style="margin: 5px; padding: 5px; border-radius: 5px; width: 80%; background-color: #e9ecef;">
+              <h4>Generate Report</h4>
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Template Preference</label>
+              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" onchange="javascript:editReport()" id="inlineFormCustomSelect">
+                <option selected>Choose...</option>
+                {% for template in template_files %}
+                  <option value="{{template[23:][:-3]}}">{{template[23:]}}</option>
+                {% endfor %}
+              </select>
+          </div>
+      </div>
+
+      <!-- HTTP Request Dashboard -->
+      <div id="requesteditor" style="display: none;">
+        <form method="POST" action="/api">
+          <div style="margin: 15px; padding: 15px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+            <h4>Request</h4>
+            <table style="margin: 5px;">
+              <tr>
+                <td style="width: 120px">
+                  <select name="method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="HEAD">HEAD</option>
+                    <option value="OPTIONS">OPTIONS</option>
+                    <option value="DELETE">DELETE</option>
+                  </select>
+                </td>
+                <td style="width: 80%;">
+                  <input type="text" class="form-control" id="endpoint_url" placeholder="API Endpoint">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  HTTP Headers:
+                </td>
+              </tr>
+              <tr>
+                <td colspan=2>
+                  <textarea class="form-control" name="HTTP-Request" rows="3"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td><hr></td>
+              </tr>
+              <tr>
+                <td><button type="submit" class="btn btn-primary">Send</button></td>
+              </tr>
+            </table>
+          </div>
+        </form>
+        <div style="margin: 15px; padding: 15px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+          <h4>Response:</h4>
+          <code>RESPONSE</code>
+        </div>
+      </div>
+
+      <!-- Previous Scans Dashboard -->
+      <div id="previous-scans" style="display: none;">
+          <div class="dashboard-table" style="margin: 15px; padding: 15px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+            <div style="width: 150px;" class="dropdown">
+              <h4>Scan History</h4>
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Source
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a class="dropdown-link" href="#aquatone-scans">Aquatone Scans</a></li>
+                <li><a class="dropdown-link" href="#nmap-scans">Nmap Scans</a></li>
+                <li><a class="dropdown-link" href="#ssl-scans">SSL Scans</a></li>
+              </ul>
+            </div>
+            <hr>
+            <h4 id="scan-type" style="display: none;">Scan</h4>
+            <ul id="aquatone-filetree" style="display: none; list-style:none;">
+              {% for folder in aquatone_folders %}
+                <li>{{ folder[15:] }}</li>
+                {% for file in aquatone_files %}
+                  {% if file[0:folder|length] == folder %}
+                    <ul><li style="list-style:none; margin-left:-15px;"><a class="filetree" href="javascript:scanResults('aquatone','{{ folder[15:] }}','{{ file[15+folder[15:]|length+1:] }}')">{{ file[15+folder[15:]|length+1:] }}</a></li></ul>
+                  {% endif %}
+                {% endfor %}
+              {% endfor%}
+            </ul>
+
+            <ul id="nmap-filetree" style="display: none; list-style:none;">
+                {% for file in nmap_files %}
+                    <li>{{file[0:11]}}</li>
+                    <ul><li style="list-style:none; margin-left:-15px;"><a class="filetree" href="javascript:scanResults('nmap','null','{{ file[11:] }}')">{{ file[11:] }}</a></li></ul>
+                {% endfor %}
+            </ul>
+
+            <ul id="ssl-filetree" style="display: none; list-style:none;">
+                {% for file in sslscans %}
+                    <li>{{file[0:15]}}</li>
+                    <ul><li style="list-style:none; margin-left:-15px;"><a class="filetree" href="javascript:scanResults('sslscans','null','{{ file[15:] }}')">{{ file[15:] }}</a></li></ul>
+                {% endfor %}
+            </ul>
+          </div>
+      </div>
+
+      <!-- Aquatone Dashboard -->
+      <div id="aquatone" style="display: none;">
+          <div class="dashboard-table" style="margin: 15px; padding: 15px; border-radius: 5px; width: 50%; background-color: #e9ecef;">
+            <h4>Aquatone Subdomain Flyover</h4>
+            <div class="row form-group aquatone-dashboard">
+                <div class="input-group" style="width: 60%; margin: 15px;">
+                  <input type="text" class="form-control" style="width: 100%;" id="aquatone-target" type="text" placeholder="Target Domain" aria-label="Target Domain" aria-describedby="btnGroupAddon">
+                  <button class="btn btn-primary input-group-addon" onclick="javascript:$('#aquatoneProgressModal').modal('show'); aquatoneDiscover($('#aquatone-target').val()); interval = setInterval(aquatoneProgressCheck,1000);" data-toggle="modal" data-target="#aquatoneProgressModal" type="button" id="btnGroupAddon">Scan <i class="fa fa-fighter-jet" aria-hidden="true"></i></button>
+                </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- Nmap Scan Dashboard -->
+      <div id="nmap" style="display: none;">
+          <div class="dashboard-table" style="margin: 15px; padding: 15px; border-radius: 5px; background-color: #e9ecef; width: 60%;">
+          <h4>Nmap Port Scanner</h4>
+          <div class="row form-group nmap-dashboard" style="margin: 15px;">
+            <input class="form-control" id="nmap_target_name" style="width: 100%; margin-bottom: 5px;" type="text" placeholder="File Name" />
+            <textarea class="form-control" rows=8 placeholder="Aquatone Output (JSON)" style="width: 100%; height: 100%;" id="Nmap-Aquatone-Hosts-JSON"></textarea>
+            <table>
+              <tr>
+                <td>
+                  <div class="btn-group" style="margin-top: 10px;" role="group" aria-label="Basic example">
+                    <button type="button" id="TCPConnectScan" class="btn btn-primary active">TCP Connect (-sT)</button>
+                    <button type="button" id="SYNStealthScan" class="btn btn-primary">SYN Stealth (-sS)</button>
+                    <button type="button" id="VersionDetctionScan" class="btn btn-primary">Version Detection (-sV)</button>
+                    <button type="button" id="PingScan" class="btn btn-primary">Ping Scan (-sP)</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-primary" onclick="javascript:$('#nmapProgressModal').modal('show'); nmapScan($('#Nmap-Aquatone-Hosts-JSON').val()); interval2 = setInterval(nmapProgressCheck,1000);" style="margin-top: 10px; width: 100%;">Scan Ports</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Dashboard -->
+        <div id="notes" style="display: none; margin: 15px; padding: 10px; border-radius: 5px; width: 60%; background-color: #e9ecef;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for note in notes %}
+                <tr>
+                  <td>{{ note[12:][:-3] }}</td>
+                  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewModal" onclick="viewNote('{{ note[12:][:-3] }}')">View <i class="fa fa-eye" aria-hidden="true"></i></button></td>
+                  <td><button type="button" data-toggle="modal" data-target="#editorModal" onclick="$('.editor-modal-body').val('');editNote('{{ note[12:][:-3] }}')" class="btn btn-primary">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
+                  <td><button type="button" onclick="deleteNote('{{ note[12:][:-3] }}')" class="btn btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button class="btn btn-primary" data-toggle="modal" onclick="javascript:$('#newNoteName').val('')" data-target="#createModal">New Note <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+    <!-- Report Generator Modal -->
+    <div style="display: none;" class="modal fade" id="reportGeneratorModal" role="dialog">
+      <div style="margin-right: auto; margin-left: auto;" class="fullscreen-modal-dialog">
+        <div class="fullscreen-modal-content">
+          <div class="modal-header">
+            <input id="reportTitle" type="text" class="form-control" style="width: 50%; margin-left: 4%;" placeholder="Report Title">
+              <div class="btn-group" role="group">
+                      <button id="editMarkdownButton" type="button" class="view-or-edit-report btn btn-primary active"><i class="fa fa-pencil" aria-hidden="true" tooltip="Edit"></i> Edit </button>
+                      <button id="previewMarkdownButton" type="button" class="view-or-edit-report btn btn-primary">Preview <i class="fa fa-eye" aria-hidden="true" tooltip="Preview"></i></button>
+              </div>
+            <button type="button" style="text-align: right;" class="close" onclick="javascript:location.reload();" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="form-group">
+            <textarea id="reportBody" cols=20 rows=20 class="form-control editor-modal-body" style="width: 90%; margin: 15px; margin-right: auto; margin-left: auto;"></textarea>
+            <div id="previewReport" style="display: none; width: 90%; margin: 15px; margin-right: auto; margin-left: auto;">
+              TEST
+            </div>
+          </div>
+          <div class="modal-footer">
+            <form class="form-inline">
+              <a role="button" class="btn btn-primary" id="dlbtn" download="null" onclick="javascript:createDownload($('#reportBody').val(),$('#reportTitle').val() + '.md', 'text/plain')"><span style="color: white;">Save Report</span></a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Nmap Progress Modal -->
+    <div style="display: none" class="modal fade" id="nmapProgressModal" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Scanning Ports...</h4>
+          </div>
+          <div class="modal-body nmap-progress-modal-body" style="padding: 15px;">
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SSL Progress Modal -->
+    <div style="display: none" class="modal fade" id="sslProgressModal" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Scanning SSL...</h4>
+          </div>
+          <div class="modal-body nmap-progress-modal-body" style="padding: 15px;">
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aquatone Progress Modal -->
+    <div style="display: none" class="modal fade" id="aquatoneProgressModal" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Scanning for subdomains...</h4>
+          </div>
+          <div class="modal-body aquatone-progress-modal-body" style="padding: 15px;">
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scan Results Modal -->
+    <div style="display: none;" class="modal fade" id="scanResults" role="dialog">
+      <div style="width: 90%; margin-right: auto; margin-left: auto;" class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="scan-results-modal-title" style="text-align: center;">Modal Header</h4>
+            <button type="button" style="text-align: right;" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="scan-results-modal-body" style="padding: 15px;">
+            <pre id="scan-result-content">
+              This is a large modal.
+            </pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Notes Modal -->
+    <div style="display: none;" class="modal fade" id="createModal" role="dialog">
+      <div style="width: 90%; margin-right: auto; margin-left: auto;" class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" style="text-align: center;">New Note</h4>
+            <button type="button" style="text-align: right;" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input class="form-control" type="text" placeholder="Note Name" id="newNoteName" style="width: 50%">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:createNewNote($('#newNoteName').val();)">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Notes  -->
+    <div style="display: none;" class="modal fade" id="viewModal" role="dialog">
+      <div style="margin-right: auto; margin-left: auto;" class="fullscreen-modal-dialog">
+        <div class="fullscreen-modal-content">
+          <div class="modal-header">
+            <h3 id="noteName" style="margin-left: 4%;"></h3>
+            <button type="button" style="text-align: right;" class="close" onclick="javascript:location.reload();" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="form-group">
+            <div id="viewNote" cols=20 rows=20 style="width: 90%; margin: 15px; margin-right: auto; margin-left: auto;">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button role="button" class="btn btn-primary" id="dlbtn" download="null" onclick="javascript:location.reload();">Close Note</note>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Edit Notes Modal -->
+    <div style="display: none;" class="modal fade" id="editorModal" role="dialog">
+      <div style="margin-right: auto; margin-left: auto;" class="fullscreen-modal-dialog">
+        <div class="fullscreen-modal-content">
+          <div class="modal-header">
+              <h4 class="editor-modal-title" style="text-align: center;">Modal Header</h4>
+              <div class="btn-group" role="group">
+                <button id="editNoteMarkdownButton" type="button" class="view-or-edit-note btn btn-primary active"><i class="fa fa-pencil" aria-hidden="true" tooltip="Edit"></i> Edit </button>
+                <button id="previewNoteMarkdownButton" type="button" class="view-or-edit-note btn btn-primary">Preview <i class="fa fa-eye" aria-hidden="true" tooltip="Preview"></i></button>
+              </div>
+            <button type="button" style="text-align: right;" class="close" onclick="javascript:location.reload();" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="form-group">
+            <textarea id="noteBody" cols=20 rows=20 class="form-control editor-modal-body" style="width: 90%; margin: 15px; margin-right: auto; margin-left: auto;"></textarea>
+            <div id="previewNote" style="display: none; width: 90%; margin: 15px; margin-right: auto; margin-left: auto;">
+              TEST
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="javascript:saveNote($('.editor-modal-title').html().substring(9), $('#noteBody').val());location.reload();" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Follow the project on <a href="https://github.com/h-yde/REST-API-Fuzzer">GitHub <i class="fa fa-github" aria-hidden="true"></i></small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- he.js HTML Entity Decoder -->
+    <script src="js/he.js"></script>
+    <!-- Bootbox -->
+    <script src="js/bootbox.min.js"></script>
+    <!-- Shodown JS -->
+    <script src="js/showdown.min.js"></script>
+    <script>converter = new showdown.Converter();</script>
+    <!-- Application Backend -->
+    <script src="js/application.js"></script>
+    </body>
+</html>

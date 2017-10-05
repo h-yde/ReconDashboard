@@ -1,0 +1,83 @@
+a {
+  color: #007bff;
+}
+
+a:hover {
+  color: #007bff;
+}
+
+.navlink {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.navlink:hover {
+  color: rgba(255, 255, 255) !important;
+}
+
+.navlink-collapse {
+  padding: 5px;
+}
+
+.fa-fighter-jet {
+  -ms-transform: rotate(-45deg); /* IE 9 */
+  -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+  transform: rotate(-45deg);
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.dropdown-link {
+  padding: 15px;
+}
+
+#previewReport, #previewNote, #viewNote {
+  width: 90%;
+  word-wrap: break-word;
+  background-color: white;
+}
+
+/* Fullscreen Modals */
+
+.fullscreen-modal-dialog {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+.fullscreen-modal-content {
+    height: 100%;
+    min-height: 100%;
+    height: auto;
+    border-radius: 0;
+    background-color: white;
+}
+
+/* Set Scan Content Height */
+
+#scan-result-content {
+  height: 400px;
+}
+
+/* Hide Scrollbars */
+.container {
+    -ms-overflow-style: none;  // IE 10+
+    overflow: -moz-scrollbars-none;  // Firefox
+}
+.container::-webkit-scrollbar {
+    display: none;  // Safari and Chrome
+}

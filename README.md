@@ -1,2 +1,2 @@
-# ReconDashboard
-Dashboard containing various recon tools
+# REST-API-Fuzzer
+Web application used to fuzz REST API endpoints.
