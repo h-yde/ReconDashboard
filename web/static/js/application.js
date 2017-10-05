@@ -90,7 +90,7 @@ $('#editNoteMarkdownButton').click(function() {
 
 $('#previewNoteMarkdownButton').click(function() {
   $("#noteBody").hide();
-  $("#previewNote").html(converter.makeHtml(he.encode($("#reportBody").val())));
+  $("#previewNote").html(converter.makeHtml(he.encode($("#noteBody").val())));
   $("#previewNote").show();
 });
 
