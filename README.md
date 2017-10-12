@@ -1,5 +1,5 @@
 # Recon Dashboard 
-Web application containing multiple recon tools all in one easy to use dashboard. This tool requires ![Aquatone](https://github.com/michenriksen/aquatone), ![sslscan](https://github.com/rbsec/sslscan) and ![Nmap](https://nmap.org/) to be installed. 
+Web application containing multiple recon tools all in one easy to use dashboard. This tool requires [Aquatone](https://github.com/michenriksen/aquatone), [sslscan](https://github.com/rbsec/sslscan) and [Nmap](https://nmap.org/) to be installed. 
 
 # Ethical Hacking
 This application is capable of exploiting remote networks and web applications. If this application is publicly accessible on the internet a malicious user could use your network to commit illegal activity. Don't use this tool to preform attacks on web applications or networks without prior consent.
@@ -23,7 +23,7 @@ This application is capable of exploiting remote networks and web applications. 
 ![Dashboard Preview](https://h-yde.github.io/assets/img/ReconDashboard.png)
 
 # Credits
-- ![Aquatone Creator](https://github.com/michenriksen)
-- ![Nmap Developers](https://nmap.org/)
-- ![sslscan](https://github.com/rbsec)
-- ![HaveIbeenPwned](https://haveibeenpwned.com/)
+- [Aquatone Creator](https://github.com/michenriksen)
+- [Nmap Developers](https://nmap.org/)
+- [sslscan](https://github.com/rbsec)
+- [HaveIbeenPwned](https://haveibeenpwned.com/)
