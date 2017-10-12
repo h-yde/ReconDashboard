@@ -65,6 +65,9 @@
               <li id="nav-item-6">
                 <a class="nav-link" href="#sslscan"><i class="fa fa-heartbeat"></i> SSL Scanner</a>
               </li>
+              <li id="nav-item-breaches">
+                <a class="nav-link" href="#breaches"><i class="fa fa-user-times"></i> Breached Database Search</a>
+              </li>
               <li>
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2"><i class="fa fa-flag" aria-hidden="true"></i> Reporting</a>
                 <ul class="sidenav-third-level collapse" id="collapseMulti2">
@@ -110,6 +113,7 @@
                   <li>Notes are viewed in fullscreen now</li>
                   <li>Note and report editor improved to include markdown preview</li>
                   <li>Report saving is now functional</li>
+                  <li>HaveIBeenPwned API Implemented, you can now identify data breaches associated with an E-mail address.</li>
                 </ul>
                 <li>To Do:</li>
                 <ul>
@@ -130,6 +134,21 @@
             <button type="button" class="btn btn-danger" onclick="javascript:$('#sslProgressModal').modal('show'); sslScan($('#SSL-Aquatone-Hosts-JSON').val()); interval3 = setInterval(sslscanProgressCheck,1000);" style="margin-top: 10px; width: 100%;">SSL Scan <i class="fa fa-heartbeat" aria-hidden="true"></i></button>
           </div>
         </div>
+      </div>
+
+      <!-- Breached Database Search Dashboard -->
+      <div id="breaches" style="display: none;">
+          <div class="dashboard-table" style="margin: 15px; padding: 15px; border-radius: 5px; width: 50%; background-color: #e9ecef;">
+            <h4>Breached Database Search</h4>
+            <div class="row form-group aquatone-dashboard">
+                <div class="input-group" style="width: 60%; margin: 15px;">
+                  <input type="text" class="form-control" style="width: 100%;" id="target-breach-check" type="text" placeholder="E-Mail Address" aria-label="Target Domain" aria-describedby="btnGroupAddon">
+                  <button class="btn btn-primary input-group-addon" onclick="javascript:$('#breachedProgressModal').modal('show'); breachDiscover($('#target-breach-check').val());" data-toggle="modal" data-target="#breachedModal" type="button" id="btnGroupAddon">Search&nbsp;<i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+                <div style="display: none; padding: 5px;" id="breach-results">
+                </div>
+            </div>
+          </div>
       </div>
 
       <!-- Report Template Importer -->
@@ -349,6 +368,20 @@
             <h4 class="modal-title">Scanning Ports...</h4>
           </div>
           <div class="modal-body nmap-progress-modal-body" style="padding: 15px;">
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breached Progress Modal -->
+    <div style="display: none" class="modal fade" id="breachedProgressModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Searching for breached accounts...</h4>
+          </div>
+          <div class="modal-body breached-progress-modal-body" style="padding: 15px;">
             <div class="loader"></div>
           </div>
         </div>

@@ -7,6 +7,25 @@ function GET_Request_API(url_or_path){
   return $.ajax({ type: "GET", url: url_or_path, async: false}).responseText
 }
 
+/* Breached Results */
+function breachDiscover(email){
+  $('#breach-results').hide();
+  $("#breach-results").html("");
+  breached_json_results = JSON.parse(POST_Request_API({"check_breaches":email}).trim());
+  if(breached_json_results != "failure"){
+    $("#breach-results").html('<div class="alert alert-danger"><strong>Account Breached!</strong> The following breaches were identified.</div><hr>');
+    for (var i=0; i<breached_json_results.length; i++) {
+      window.setTimeout(function (){ $('#breachedProgressModal').modal('hide'); }, 3000);
+      $("#breach-results").append("<h4>" + breached_json_results[i].Name + "</h4>" + breached_json_results[i].Description + "<hr>");
+      $('#breach-results').show();
+    }
+  } else if(breached_json_results == "failure"){
+    window.setTimeout(function (){ $('#breachedProgressModal').modal('hide'); }, 3000);
+    $("#breach-results").html("<div class='alert alert-success'><strong>No Breaches Detected</strong><br/> No Breaches associated with this account have been identified.</div><hr>");
+    $('#breach-results').show();
+  }
+}
+
 /* Reports */
 function editReport(){
   var report_name = $("#inlineFormCustomSelect").val();
@@ -228,6 +247,7 @@ function hideAllForms(){
   $("#sslscan").hide(); // Hide Heartbleed Module
   $("#import-report-template").hide(); // Hide Report Template Importer
   $("#generate-report").hide(); // Hide Report Generator
+  $("#breaches").hide(); // Hide Breached Database Panel
   $("#nav-item-0").removeClass("active"); // Dashboard
   $("#nav-item-1").removeClass("active"); // Request Editor
   $("#nav-item-2").removeClass("active"); // Notes
@@ -237,6 +257,7 @@ function hideAllForms(){
   $("#nav-item-6").removeClass("active"); // Heartbleed
   $("#nav-item-7").removeClass("active"); // Import Report Template
   $("#nav-item-8").removeClass("active"); // Generate Report
+  $("#nav-item-breaches").removeClass("active"); // Generate Report
   $("#collapseMulti").removeClass("active"); // Collapse Nav 1
   $("#collapseMulti2").removeClass("active"); // Collapse Nav 2
 }
@@ -316,6 +337,14 @@ $(window).on('hashchange',function(){
     $("#sslscan").show();
     $("#nav-item-6").addClass("active");
     $("#breadcrum-name").html("Tests for POODLE (CVE-2014-3566) and Heartbleed (CVE-2014-0160)");
+    $("#collapseMulti").addClass("show");
+  }
+
+  if(location.hash == "#breaches"){
+    hideAllForms();
+    $("#breaches").show();
+    $("#nav-item-breaches").addClass("active");
+    $("#breadcrum-name").html("Breached Database Search");
     $("#collapseMulti").addClass("show");
   }
 
@@ -429,6 +458,14 @@ if(location.hash == "#sslscan"){
   $("#sslscan").show();
   $("#nav-item-6").addClass("active");
   $("#breadcrum-name").html("Tests for POODLE (CVE-2014-3566) and Heartbleed (CVE-2014-0160)");
+  $("#collapseMulti").addClass("show");
+}
+
+if(location.hash == "#breaches"){
+  hideAllForms();
+  $("#breaches").show();
+  $("#nav-item-breaches").addClass("active");
+  $("#breadcrum-name").html("Breached Database Search");
   $("#collapseMulti").addClass("show");
 }
 

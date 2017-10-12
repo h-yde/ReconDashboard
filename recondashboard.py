@@ -8,7 +8,7 @@ import subprocess
 import threading
 import json
 from flask_misaka import Misaka
-from flask import Flask, render_template, request, jsonify, escape
+from flask import Flask, Response, render_template, request, jsonify, escape
 
 # Web Application Variables
 app = Flask(__name__, static_url_path='', static_folder='web/static', template_folder='web/templates')
@@ -67,8 +67,6 @@ def sslScan(command, scan_filename):
 	with open("files/finished/ssl-scanning.txt", "w+") as progress_checker:
 		progress_checker.write("false")
 
-
-
 # HTTP Handlers
 @app.route('/', methods = ['GET', 'POST'])
 def index():
@@ -93,7 +91,7 @@ def api():
 				else:
 					return jsonify("failure")
 
-	if request.form.get('scan_results') == "sslscans":
+	elif request.form.get('scan_results') == "sslscans":
 		if request.form.get('folder') == "null":
 			if request.form.get('file_name') != None:
 				path = os.path.abspath("files/sslscans/" + request.form.get('file_name'))
@@ -117,6 +115,14 @@ def api():
 						return jsonify("failure")
 				else:
 					return jsonify("failure")
+
+	elif request.form.get('check_breaches') != None:
+		try:
+			json_response = urllib2.urlopen(urllib2.Request("https://haveibeenpwned.com/api/v2/breachedaccount/" + request.form.get('check_breaches'), headers={ 'User-Agent' : 'ReconDashboard Account Checker' })).read()
+			return Response(json_response, mimetype='application/json')
+		except:
+			return jsonify("failure")
+
 
 
 	# Convert JSON Object into valid Host List & Then Nmap Scan
