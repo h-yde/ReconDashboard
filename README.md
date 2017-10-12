@@ -5,6 +5,7 @@ Web application containing multiple recon tools all in one easy to use dashboard
 This application is capable of exploiting remote networks and web applications. If this application is publicly accessible on the internet a malicious user could use your network to commit illegal activity. Don't use this tool to preform attacks on web applications or networks without prior consent.
 
 # Recent Updates
+- HaveIBeenPwned data breach result searching implemented
 - Notes are viewed in fullscreen now
 - Note and report editor improved to include markdown preview
 - Report saving is now functional
@@ -12,7 +13,6 @@ This application is capable of exploiting remote networks and web applications. 
 # To Do
 - Add ability to upload report templates
 - Make HTTP Request Editor functional
-- Integrate HaveIBeenPwned data breach searching
 - Create a modular solution for adding new CVE's
 - Include a panel containing various local root exploits
 - Implement an exploit panel containing a searchable list of CVE's. Each CVE will include a description, vulnerable software versions and release dates. Each CVE implemented will have it's own exploit panel which will gather user input and then attempt exploitation. 
@@ -26,3 +26,4 @@ This application is capable of exploiting remote networks and web applications. 
 - ![Aquatone Creator](https://github.com/michenriksen)
 - ![Nmap Developers](https://nmap.org/)
 - ![sslscan](https://github.com/rbsec)
+- ![HaveIbeenPwned](http://haveibeenpwned.com/)
