@@ -26,4 +26,4 @@ This application is capable of exploiting remote networks and web applications. 
 - ![Aquatone Creator](https://github.com/michenriksen)
 - ![Nmap Developers](https://nmap.org/)
 - ![sslscan](https://github.com/rbsec)
-- ![HaveIbeenPwned](http://haveibeenpwned.com/)
+- ![HaveIbeenPwned](https://haveibeenpwned.com/)
